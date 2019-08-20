@@ -62,38 +62,38 @@
         </div>
     </div>
     <script>
-
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-function spaceColoring() {
-    let body = document.querySelector("body");
-    body.style['background-color'] = getRandomColor();
-
-    let nodes = document.querySelectorAll(".outer");
-
-    var i = 0;
-    function f() {
-        nodes[i].style['background-color'] = getRandomColor();
-        i++;
-        if( i < nodes.length ){
-            setTimeout( f, 200 );
+        function getRandomColor() {
+            let letters = '0123456789ABCDEF';
+            let color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
-    }
-    setTimeout(f, 200);
-}
 
-let nodes = document.querySelectorAll(".outer");
-nodes += 1;
-const interval = nodes.length * 200;
-spaceColoring();
-setInterval(spaceColoring, interval);
+        function spaceColoring() {
+            let body = document.querySelector("body");
+            body.style['background-color'] = getRandomColor();
+
+            let nodes = document.querySelectorAll(".outer");
+
+            let i = 0;
+            function recursiveTimeout() {
+                nodes[i].style['background-color'] = getRandomColor();
+                i++;
+                if(i < nodes.length){
+                    setTimeout(recursiveTimeout, 200);
+                }
+            }
+            setTimeout(recursiveTimeout, 200);
+        }
+
+        let nodes = document.querySelectorAll(".outer");
+        nodes += 1;
+        const interval = nodes.length * 200;
+
+        spaceColoring();
+        setInterval(spaceColoring, interval);
     </script>
   </body>
 </html>
